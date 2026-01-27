@@ -17,9 +17,9 @@ services:
     container_name: phpmyadmin
     environment:
       PMA_HOST: database
-      PMA_PORT: ${DB_PORT}
+      PMA_PORT: 3306
     ports:
-      - ${PMA_PORT}:8080
+      - ${PMA_PORT}:80
     depends_on:
       - database
     networks:
@@ -45,7 +45,6 @@ services:
       - database-network
       - backend-network
 
-
   nginx:
     image: nginx:alpine
     container_name: nginx_server
@@ -68,7 +67,7 @@ services:
     working_dir: /frontend
     # restart: unless-stopped
     ports:
-      - ${FRONTEND_PORT}:3000
+      - ${FRONTEND_PORT}:5173
     volumes:
       - ./app:/frontend/src
       - ./docker/react/public:/frontend/public
